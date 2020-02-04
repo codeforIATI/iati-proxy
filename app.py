@@ -21,5 +21,6 @@ def proxy():
         return '', 404
     r = requests.get(url, headers={'user-agent': USER_AGENT})
     resp = Response(r.content, headers={
+        'content-type': r.headers.get('Content-Type', 'text/xml'),
         'access-control-allow-origin': '*'})
     return resp
