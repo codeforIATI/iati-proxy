@@ -1,10 +1,8 @@
-from flask import Flask, request
-from flask_cors import CORS
+from flask import Flask, request, Response
 import requests
 
 
 app = Flask(__name__)
-CORS(app)
 
 
 USER_AGENT = 'Mozilla/5.0 (compatible; iati-proxy.herokuapp.com)'
@@ -22,4 +20,6 @@ def proxy():
     if not url:
         return '', 404
     r = requests.get(url, headers={'user-agent': USER_AGENT})
-    return r.content
+    resp = Response(r.content, headers={
+        'access-control-allow-origin': '*'})
+    return resp
