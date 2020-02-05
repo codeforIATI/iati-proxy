@@ -19,8 +19,10 @@ def proxy():
     url = j.get('result', {}).get('resources', [{}])[0].get('url')
     if not url:
         return '', 404
-    r = requests.get(url, headers={'user-agent': USER_AGENT})
-    resp = Response(r.content, headers={
-        'content-type': r.headers.get('Content-Type', 'text/xml'),
-        'access-control-allow-origin': '*'})
-    return resp
+    with requests.get(url,
+                      headers={'user-agent': USER_AGENT},
+                      stream=True) as r:
+        resp = Response(r.content, headers={
+            'content-type': r.headers.get('Content-Type', 'text/xml'),
+            'access-control-allow-origin': '*'})
+        return resp
