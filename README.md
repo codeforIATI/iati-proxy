@@ -5,7 +5,7 @@ A proxy service that adds CORS to IATI registry data, so that it can be reused m
 Requests should be in the following format:
 
 ```
-https://iati-proxy.herokuapp.com/raw?dataset=[dataset ID]
+https://iati-proxy.herokuapp.com/get?id=[dataset ID]
 ```
 
-So for example: https://iati-proxy.herokuapp.com/raw?dataset=pwyf-org
+So for example: https://iati-proxy.herokuapp.com/get?id=pwyf-org
